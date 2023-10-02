@@ -1,2 +1,2 @@
 # ticket-project
-auto purchaser in py
+Auto ticket purchaser in py

@@ -31,24 +31,33 @@ driver = webdriver.Chrome(options=chrome_options)
 # Navigate to the StubHub checkout URL
 driver.get(checkout_url)
 
-# Close the browser
+# Wait for the page to load (you can adjust the time based on your internet speed)
+time.sleep(5)
+
+# Inpsecting checkout page and checking out
+quantity_field = driver.find_element(By.NAME, 'quantity')
+quantity_field.clear()
+quantity_field.send_keys('2')
+
+# Example -- Fill out other necessary information (adjust for your info and edit to fit ticket page)
+driver.find_element(By.NAME, 'name').send_keys('Your Name')
+driver.find_element(By.NAME, 'email').send_keys('Your Email')
+driver.find_element(By.NAME, 'creditCardNumber').send_keys('Your Credit Card Number')
+driver.find_element(By.NAME, 'expirationMonth').send_keys('MM')
+driver.find_element(By.NAME, 'expirationYear').send_keys('YYYY')
+driver.find_element(By.NAME, 'cvv').send_keys('CVV')
+
+# Example -- Click the "Continue or Next" button to proceed 
+driver.find_element(By.NAME, 'continueButton').click()
+
+# Checking if it worked.
+success_indicator = driver.find_element(By.ID, 'successMessage')  # Example locator for success message
+
+if success_indicator and "Ticket purchased successfully" in success_indicator.text:
+    print("Ticket bought successfully!")
+else:
+    print("Error: Ticket not purchased")
+
+# Close the browser when you're done
 driver.quit()
-
-#Navigate to the checkout page URL
-
-#Generic editable part that IDK how to do, the actual checkout and buying process
-
-#use Selenium to interact with elements on the page, fill out forms, click buttons, etc.
-
-
-#Example idk:
-#driver.find_element_by_id('input_field_id').send_keys('your_data')
-#driver.find_element_by_id('submit_button_id').click()
-
-
-#At this point, the browser window will be open at the checkout page,
-#and the specific automation code you add will execute.
-
-#To close the browser when you're done:
-#driver.quit() 
 
