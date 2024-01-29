@@ -1,2 +1,2 @@
 # ticket-project
-Auto ticket purchaser in py
+Auto purchasing bot project in py using selenium for web scraping
